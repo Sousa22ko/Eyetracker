@@ -9,17 +9,48 @@ package eyetracker;
  *
  * @author samue
  */
+
 public class Acao {
-    public enum acoesArtes{
-        pintar, desenhar, cantar, dancar;
+
+    private int rodadaDaAcao;
+    private int tempoDeContatoNaAcao;
+    private int tempoSemContato;
+
+    public Acao(int rodadaDaAcao) {
+
+        this.rodadaDaAcao = rodadaDaAcao;
     }
-    
-    public enum acoesBrincadeira{
-        fazerBolha, darSusto, fazerCareta;
+
+    public int getRodada() {
+        return rodadaDaAcao;
     }
-    
-    public enum acoesTragedia{
-        cair, baterCabeca, levarSusto;
+
+    public int getTempoDeContatoNaAcao() {
+        return tempoDeContatoNaAcao;
     }
-    
+
+    public int getTempoSemContato() {
+        return tempoSemContato;
+    }
+
+    public void setRodada(int rodadaDaAcao) {
+        this.rodadaDaAcao = rodadaDaAcao;
+    }
+
+    public void setTempoDeContatoNaAcao(int tempoDeContatoNaAcao) {
+        this.tempoDeContatoNaAcao = tempoDeContatoNaAcao;
+    }
+
+    public void setTempoSemContato(int tempoSemContato) {
+        this.tempoSemContato = tempoSemContato;
+    }
+
+    public void incrementaContato() {
+        this.tempoDeContatoNaAcao += 1;
+    }
+
+    public void incrementaNaoContato() {
+        this.tempoSemContato += 1;
+    }
+
 }
