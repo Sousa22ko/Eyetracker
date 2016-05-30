@@ -118,8 +118,9 @@ public class Jogador {
         return (tempoJogado >= tempoDeRecompensa);
     }
 
-    public String jogar() {
+    public String selectImage() {
 
+        
         if (rodadaJogo % 3 == 0) {
             r = rand.nextInt() % 3;
         }

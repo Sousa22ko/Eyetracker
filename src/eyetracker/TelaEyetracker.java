@@ -5,7 +5,9 @@
  */
 package eyetracker;
 
+import graphic.Grafico;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
@@ -20,15 +22,24 @@ public class TelaEyetracker extends javax.swing.JFrame {
      * Creates new form TelaEyetracker
      */
     private DataBase db;
+
+    ArrayList nomes = new ArrayList();
+    ArrayList valores = new ArrayList();
+
     private int statebutton;
 
     public TelaEyetracker() throws SQLException, ClassNotFoundException {
         initComponents();
         db = new DataBase();
+
         statebutton = 0;
 
         jLabel1.setText(null);
         jLabel2.setText("selecione o modo de visualização no menu");
+
+        jLabel3.setText("");
+        jLabel4.setText("");
+        jLabel5.setText("");
 
         jButton1.setVisible(false);
         jButton2.setVisible(false);
@@ -59,7 +70,9 @@ public class TelaEyetracker extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -73,7 +86,7 @@ public class TelaEyetracker extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 423, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 605, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -128,7 +141,7 @@ public class TelaEyetracker extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -152,7 +165,7 @@ public class TelaEyetracker extends javax.swing.JFrame {
                 .addComponent(jButton3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 97, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 123, Short.MAX_VALUE)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -162,19 +175,29 @@ public class TelaEyetracker extends javax.swing.JFrame {
         jLabel5.setText("jLabel5");
 
         jMenu1.setText("jogar");
-        jMenu1.addActionListener(new java.awt.event.ActionListener() {
+
+        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_J, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem1.setText("Jogar");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenu1ActionPerformed(evt);
+                jMenuItem1ActionPerformed(evt);
             }
         });
+        jMenu1.add(jMenuItem1);
+
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("ver estatisticas");
-        jMenu2.addActionListener(new java.awt.event.ActionListener() {
+        jMenu2.setText("ver estatistica");
+
+        jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem2.setText("Ver estatisticas");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenu2ActionPerformed(evt);
+                jMenuItem2ActionPerformed(evt);
             }
         });
+        jMenu2.add(jMenuItem2);
+
         jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
@@ -186,7 +209,9 @@ public class TelaEyetracker extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(77, 77, 77))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -198,57 +223,37 @@ public class TelaEyetracker extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(40, 40, 40))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
-        // TODO add your handling code here:
-
-        statebutton = 1;
-        
-        try {
-            db.incrementaRodada();
-        } catch (SQLException ex) {
-            Logger.getLogger(TelaEyetracker.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        jLabel2.setText("Escolha seu personagem");
-        jLabel3.setText("rodada: " + db.getRodada());
-        jLabel4.setText("jogada: " + db.getIdJogada());
-
-        jButton1.setVisible(true);
-        jButton2.setVisible(true);
-        jButton3.setVisible(true);
-        jButton4.setVisible(true);
-
-        jButton1.setText("gato");
-        jButton2.setText("cachorro");
-        jButton3.setText("menino");
-        jButton4.setText("menina");
-
-    }//GEN-LAST:event_jMenu1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
         if (statebutton == 1) {
             db.setJogadorPersonagem("gato");
             setState2();
-        }
-        
-        else if(statebutton == 2){
+        } else if (statebutton == 2) {
             db.setCategoriaAcao("artes");
             try {
                 jogoRun();
             } catch (SQLException ex) {
                 Logger.getLogger(TelaEyetracker.class.getName()).log(Level.SEVERE, null, ex);
             }
+        } else if (statebutton == 3) {
+
+            try {
+                preencheGraficoPersonagens();
+            } catch (SQLException ex) {
+                Logger.getLogger(TelaEyetracker.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            jLabel1.add(Grafico.pizza3DStatic(nomes, valores, "personagens"));
+
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -258,15 +263,22 @@ public class TelaEyetracker extends javax.swing.JFrame {
         if (statebutton == 1) {
             db.setJogadorPersonagem("cachorro");
             setState2();
-        }
-        
-        else if(statebutton == 2){
+        } else if (statebutton == 2) {
             db.setCategoriaAcao("brincadeiras");
             try {
                 jogoRun();
             } catch (SQLException ex) {
                 Logger.getLogger(TelaEyetracker.class.getName()).log(Level.SEVERE, null, ex);
             }
+        } else if (statebutton == 3) {
+
+            try {
+                preencheGraficoQualidade();
+            } catch (SQLException ex) {
+                Logger.getLogger(TelaEyetracker.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            jLabel1.add(Grafico.pizza3DStatic(nomes, valores, "qualidade da ação"));
+
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -276,15 +288,22 @@ public class TelaEyetracker extends javax.swing.JFrame {
         if (statebutton == 1) {
             db.setJogadorPersonagem("menino");
             setState2();
-        }
-        
-        else if(statebutton == 2){
+        } else if (statebutton == 2) {
             db.setCategoriaAcao("tragedias");
             try {
                 jogoRun();
             } catch (SQLException ex) {
                 Logger.getLogger(TelaEyetracker.class.getName()).log(Level.SEVERE, null, ex);
             }
+        } else if (statebutton == 3) {
+
+            try {
+                preencheGraficoTipo();
+            } catch (SQLException ex) {
+                Logger.getLogger(TelaEyetracker.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            jLabel1.add(Grafico.pizza3DStatic(nomes, valores, "tipo da ação"));
+
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -295,35 +314,78 @@ public class TelaEyetracker extends javax.swing.JFrame {
             db.setJogadorPersonagem("menina");
             setState2();
         }
-        
+
     }//GEN-LAST:event_jButton4ActionPerformed
 
-    private void jMenu2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu2ActionPerformed
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         // TODO add your handling code here:
         
-        jLabel1.setIcon(null);
-    }//GEN-LAST:event_jMenu2ActionPerformed
-
-    public void jogoRun() throws SQLException{
         
+        jLabel1.setIcon(null);
+
+        jButton1.setText("personagens");
+        jButton2.setText("qualidade da ação");
+        jButton3.setText("tipo de ação");
+        
+        jButton1.setVisible(true);
+        jButton2.setVisible(true);
+        jButton3.setVisible(true);
+        
+        jButton4.setVisible(false);
+
+        statebutton = 3;
+
+        jLabel2.setText("escolha o tipo de grafico");
+        jLabel3.setVisible(false);
+        jLabel4.setVisible(false);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+        
+        statebutton = 1;
+
+        try {
+            db.incrementaRodada();
+        } catch (SQLException ex) {
+            Logger.getLogger(TelaEyetracker.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        jLabel2.setText("Escolha seu personagem");
+        //jLabel3.setText("rodada: " + db.getRodada());
+        //jLabel4.setText("jogada: " + db.getIdJogada());
+
+        jButton1.setText("gato");
+        jButton2.setText("cachorro");
+        jButton3.setText("menino");
+        jButton4.setText("menina");
+        
+        jButton1.setVisible(true);
+        jButton2.setVisible(true);
+        jButton3.setVisible(true);
+        jButton4.setVisible(true);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    public void jogoRun() throws SQLException {
+
         // --------------------------------------- é aqui que a magia acontece---------------------------
         
-        while(true){
-        
-            jLabel1.setIcon(new ImageIcon(db.jogar())); 
-        
-            if(db.getSequenciaOtima() >= 5)
+            //aqui ocorre a simulação da jogada
+            jLabel1.setText(db.jogar(15));
+
+            if (db.getSequenciaOtima() >= 5) {
                 fimDoJogo();
-            
-            
-        }
-    
+            }
+
+        
+
     }
-    
-    public void fimDoJogo(){
-    
+
+    public void fimDoJogo() {
+        jLabel1.setText("Fim de jogo");
+        jLabel5.setText("fim de jogo");
     }
-    
+
     public void setState2() {
 
         statebutton = 2;
@@ -393,7 +455,51 @@ public class TelaEyetracker extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
+
+    private void preencheGraficoPersonagens() throws SQLException {
+
+        this.nomes.clear();
+        this.valores.clear();
+
+        this.nomes.add("gato");
+        this.nomes.add("cachorro");
+        this.nomes.add("menino");
+        this.nomes.add("menina");
+
+        this.valores = db.preencheValoresPersonagen();
+    }
+
+    private void preencheGraficoQualidade() throws SQLException {
+
+        this.nomes.clear();
+        this.valores.clear();
+
+        this.nomes.add("ruim");
+        this.nomes.add("medio");
+        this.nomes.add("bom");
+        this.nomes.add("otimo");
+
+        this.valores.add(10);
+        this.valores.add(20);
+        this.valores.add(30);
+        this.valores.add(40);
+    }
+
+    private void preencheGraficoTipo() throws SQLException {
+
+        this.nomes.clear();
+        this.valores.clear();
+
+        this.nomes.add("ação");
+        this.nomes.add("brincadeiras");
+        this.nomes.add("tragedias");
+
+        this.valores = db.preencheValoresTipo();
+    }
+
 }
